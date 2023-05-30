@@ -7,7 +7,7 @@ class Player {
   boolean movingRight;
   PImage fly;
   Player(float x, float y, float size, float speed) {
-    fly = loadImage("rocket1.png");
+    fly = loadImage("rocket.jpg");
     this.x = x;
     this.y = y;
     this.size = size;
@@ -29,7 +29,7 @@ class Player {
     fill(255);
     rectMode(CENTER);
     image(fly,x,y,size,size);
-    rect(x, y, size, size);
+    
   }
   
   float getX() {

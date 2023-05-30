@@ -4,8 +4,9 @@ class Alien {
   float size;
   float speed;
   boolean alive;
-  
+  PImage red;
   Alien(float x, float y, float size, float speed) {
+   red = loadImage("alien1.png");
     this.x = x;
     this.y = y;
     this.size = size;
@@ -25,7 +26,7 @@ class Alien {
   void display() {
     if (alive) {
       fill(0, 255, 0);
-      ellipse(x, y, size, size);
+      image(red,x,y,size,size);
     }
   }
   

@@ -8,7 +8,7 @@ class Bullet {
     this.x = x;
     this.y = y;
     this.size = size;
-    this.speed = speed;
+    this.speed = 8;
   }
   
   void update() {

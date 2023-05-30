@@ -11,14 +11,14 @@ Bullet[] alienBullets;
 int numAlienBullets = 5;  
 int score = 0; 
 int level = 1; 
-int maxLevel = 5;
+int maxLevel = 10;
 int playerHealth = 3;  
 boolean gameEnded = false;  
-
+int frames; 
 void setup() {
   size(400, 400);
   resetGame();
-  
+  frames = 3600;
   
   stars = new Star[numStars];
   for (int i = 0; i < numStars; i++) {
@@ -29,7 +29,9 @@ void setup() {
 void draw() {
   background(0);
   
- 
+ frames --;
+  
+  
   for (int i = 0; i < numStars; i++) {
     stars[i].update();
     stars[i].display();
@@ -57,8 +59,8 @@ void draw() {
     }
     
    
-    if (isAlienBulletActive && alienBullets[i].hits2(player)) {
-      playerHealth--;  
+    if (isAlienBulletActive && alienBullets[i].hits(aliens[i])) {
+    
       if (playerHealth <= 0) {
         gameOver();  
       }
@@ -101,8 +103,11 @@ void draw() {
   textAlign(LEFT);
   text("Score: " + score, 10, 30);
   text("Level: " + level, 10, 60);
-  text("Health: " + playerHealth, 10, 90);
-  
+  text("Time: " + frames/60, 10, 90);
+  if ( frames <= 0){
+   text("GAMEOVER", width/2,height/2); 
+  noLoop();
+}
   
   boolean allAliensDead = true;
   for (int i = 0; i < numAliens; i++) {
@@ -115,8 +120,9 @@ void draw() {
   if (allAliensDead) {
     level++;
     if (level > maxLevel) {
-      
+      text("YOU WIN!!", width/2,height /2);
       gameWin();
+      noLoop();
     } else {
       
       increaseDifficulty();
@@ -144,7 +150,7 @@ void resetGame() {
 
 void increaseDifficulty() {
   for (int i = 0; i < numAliens; i++) {
-    aliens[i].increaseSpeed(1);
+    aliens[i].increaseSpeed(2);
     aliens[i].increaseSize(5);
   }
 }

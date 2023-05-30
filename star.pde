@@ -6,7 +6,7 @@ class Star {
   Star(float x, float y, float size) {
     this.x = x;
     this.y = y;
-    this.size = size;
+    this.size = 5;
   }
   
   void update() {
