@@ -1,0 +1,7 @@
+Images for the objects are in their individual classes. Since I only used 2 images they are in the Player and Alien classes. 
+
+I don't have any sounds in my game.
+
+
+
+Each class is similar although there are a few differences. For example in my "Bullet" class the parameters I used for the constructor controlled the speed and size of the bullet. But for the player and Alien class the parameters were just used to track the position of where they were on the screen, and to check for collisions. 
