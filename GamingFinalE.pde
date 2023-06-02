@@ -15,11 +15,21 @@ int maxLevel = 10;
 int playerHealth = 3;  
 boolean gameEnded = false;  
 int frames; 
+int Title;
+int TitleTime;
+import processing.sound.*;
+SoundFile file;
+SoundFile Shoot;
+AudioIn in;
 void setup() {
   size(400, 400);
   resetGame();
-  frames = 3600;
-  
+  Title = 0; 
+  frames = 5600;
+  in = new AudioIn(this,0);
+  file = new SoundFile(this,"GameMusic1.mp3");
+Shoot = new SoundFile(this, "shoot.mp3");
+ file.play();
   stars = new Star[numStars];
   for (int i = 0; i < numStars; i++) {
     stars[i] = new Star(random(width), random(height), random(0.5, 2.0));
@@ -28,10 +38,23 @@ void setup() {
 
 void draw() {
   background(0);
-  
+ 
  frames --;
+ 
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+ if(frames <= 0){
+  file.stop(); 
+   
+ }
   for (int i = 0; i < numStars; i++) {
     stars[i].update();
     stars[i].display();
@@ -77,8 +100,8 @@ void draw() {
   if (isBulletActive) {
     playerBullet.update();
     playerBullet.display();
-    
-    
+    Shoot.play();
+
     for (int i = 0; i < numAliens; i++) {
       if (aliens[i].isAlive() && playerBullet.hits(aliens[i])) {
         aliens[i].kill(); 
@@ -104,6 +127,7 @@ void draw() {
   text("Score: " + score, 10, 30);
   text("Level: " + level, 10, 60);
   text("Time: " + frames/60, 10, 90);
+  
   if ( frames <= 0){
    text("GAMEOVER", width/2,height/2); 
   noLoop();
@@ -146,11 +170,14 @@ void resetGame() {
   for (int i = 0; i < numAlienBullets; i++) {
     alienBullets[i] = new Bullet(0, 0, 5, 3);
   }
+
+
+
 }
 
 void increaseDifficulty() {
   for (int i = 0; i < numAliens; i++) {
-    aliens[i].increaseSpeed(2);
+    aliens[i].increaseSpeed(10);
     aliens[i].increaseSize(5);
   }
 }
